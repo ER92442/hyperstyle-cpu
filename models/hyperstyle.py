@@ -105,7 +105,8 @@ class HyperStyle(nn.Module):
 
     def __load_latent_avg(self, ckpt, repeat=None):
         if 'latent_avg' in ckpt:
-            self.latent_avg = ckpt['latent_avg'].to(self.opts.device)
+            #print(self.opts.device)
+            self.latent_avg = ckpt['latent_avg'].to('cpu')
             if repeat is not None:
                 self.latent_avg = self.latent_avg.repeat(repeat, 1)
         else:
@@ -145,7 +146,7 @@ class HyperStyle(nn.Module):
         w_net = pSp(opts_w_encoder)
         w_net = w_net.encoder
         w_net.eval()
-        w_net.cuda()
+        w_net.to('cpu') #cuda()
         return w_net
 
     def __get_initial_inversion(self, x, resize=True):

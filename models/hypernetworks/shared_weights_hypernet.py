@@ -15,11 +15,11 @@ class SharedWeightsHypernet(nn.Module):
         self.out_size = out_size
         self.in_size = in_size
 
-        self.w1 = Parameter(torch.fmod(torch.randn((self.z_dim, self.out_size * self.f_size * self.f_size)).cuda() / 40, 2))
-        self.b1 = Parameter(torch.fmod(torch.randn((self.out_size * self.f_size * self.f_size)).cuda() / 40, 2))
+        self.w1 = Parameter(torch.fmod(torch.randn((self.z_dim, self.out_size * self.f_size * self.f_size)).to('cpu') / 40, 2)) #.cuda()
+        self.b1 = Parameter(torch.fmod(torch.randn((self.out_size * self.f_size * self.f_size)).to('cpu') / 40, 2))
 
-        self.w2 = Parameter(torch.fmod(torch.randn((self.z_dim, self.in_size * self.z_dim)).cuda() / 40, 2))
-        self.b2 = Parameter(torch.fmod(torch.randn((self.in_size * self.z_dim)).cuda() / 40, 2))
+        self.w2 = Parameter(torch.fmod(torch.randn((self.z_dim, self.in_size * self.z_dim)).to('cpu') / 40, 2))
+        self.b2 = Parameter(torch.fmod(torch.randn((self.in_size * self.z_dim)).to('cpu') / 40, 2))
 
     def forward(self, z):
         batch_size = z.shape[0]

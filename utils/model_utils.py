@@ -4,12 +4,12 @@ from argparse import Namespace
 import sys
 sys.path.extend(['.', '..'])
 
-from models.stylegan2.model import Generator
+#from models.stylegan2.model import Generator
 from models.hyperstyle import HyperStyle
 from models.encoders.e4e import e4e
 
 
-def load_model(checkpoint_path, device='cuda', update_opts=None, is_restyle_encoder=False):
+def load_model(checkpoint_path, device='cpu', update_opts=None, is_restyle_encoder=False):
     ckpt = torch.load(checkpoint_path, map_location='cpu')
     opts = ckpt['opts']
 
@@ -34,11 +34,11 @@ def load_model(checkpoint_path, device='cuda', update_opts=None, is_restyle_enco
     return net, opts
 
 
-def load_generator(checkpoint_path, device='cuda'):
-    print(f"Loading generator from checkpoint: {checkpoint_path}")
-    generator = Generator(1024, 512, 8, channel_multiplier=2)
-    ckpt = torch.load(checkpoint_path, map_location='cpu')
-    generator.load_state_dict(ckpt['g_ema'])
-    generator.eval()
-    generator.to(device)
-    return generator
+#def load_generator(checkpoint_path, device='dml'):
+    # print(f"Loading generator from checkpoint: {checkpoint_path}")
+    # generator = Generator(1024, 512, 8, channel_multiplier=2)
+    # ckpt = torch.load(checkpoint_path, map_location='cpu')
+    # generator.load_state_dict(ckpt['g_ema'])
+    # generator.eval()
+    # generator.to(device)
+    # return generator

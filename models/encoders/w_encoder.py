@@ -33,6 +33,7 @@ class WEncoder(Module):
         self.style_count = 2 * log_size - 2
 
     def forward(self, x):
+#        print(self.input_layer(x))
         x = self.input_layer(x)
         x = self.body(x)
         x = self.output_pool(x)

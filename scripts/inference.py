@@ -60,7 +60,7 @@ def run():
             break
 
         with torch.no_grad():
-            input_cuda = input_batch.cuda().float()
+            input_cuda = input_batch.to('cpu').float()    #.cuda().float()
             tic = time.time()
             result_batch, result_latents, result_deltas = run_inversion(input_cuda, net, opts,
                                                                         return_intermediate_results=True)
@@ -106,3 +106,4 @@ def run():
 
 if __name__ == '__main__':
     run()
+#python scripts/inference.py --exp_dir='C:/Temp/aligned'  --checkpoint_path='C:/Temp/pre-trained model/hyperstyle_ffhq.pt'  --data_path='c:/Temp/another'  --test_batch_size=4  --test_workers=4  --n_iters_per_batch=5  --load_w_encoder  --w_encoder_checkpoint_path 'C:/Temp/pre-trained model/faces_w_encoder.pt'
